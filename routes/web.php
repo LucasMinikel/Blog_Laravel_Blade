@@ -1,6 +1,11 @@
 <?php
 
+use App\Models\PostModel;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use League\CommonMark\Extension\FrontMatter\Data\SymfonyYamlFrontMatterParser;
+use PhpParser\Node\Expr\YieldFrom;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +19,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts', [
+        'posts' =>  PostModel::allPosts()
+    ]);
 });
+
+Route::get('post/{post}', function ($id) {
+    return view('post', [
+        'post' =>  PostModel::findPost($id)
+    ]);
+})->whereNumber('post');
