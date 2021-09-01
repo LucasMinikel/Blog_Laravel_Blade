@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
+use function PHPUnit\Framework\returnSelf;
 
 class PostModel extends Model
 {
@@ -44,5 +45,16 @@ class PostModel extends Model
     public static function findPost($id)
     {
         return static::allPosts()->firstWhere('id', $id);
+    }
+
+    public static function findOrFailPost($id)
+    {
+        $post = static::findPost($id);
+
+        if (!$post){
+            throw  new ModelNotFoundException();
+        }
+        
+        return $post;
     }
 }

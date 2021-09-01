@@ -26,6 +26,6 @@ Route::get('/', function () {
 
 Route::get('post/{post}', function ($id) {
     return view('post', [
-        'post' =>  PostModel::findPost($id)
+        'post' =>  PostModel::findOrFailPost($id)
     ]);
 })->whereNumber('post');
