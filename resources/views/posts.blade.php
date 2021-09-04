@@ -6,11 +6,12 @@
                 {{$post->title}}
             </a>
         </h1>
+        <p>
+            Escrito por <a href="/authors/{{$post->author->id}}">{{$post->author->name}}</a> em <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a>
+        
+        </p>
         <div>
             {{$post->excerpt}}
-        </div>
-        <div>
-            {{$post->date}}
         </div>
     </article>
     @endforeach

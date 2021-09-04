@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\PostModel;
-use Illuminate\Support\Facades\File;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\PostMeta;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use League\CommonMark\Extension\FrontMatter\Data\SymfonyYamlFrontMatterParser;
-use PhpParser\Node\Expr\YieldFrom;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +17,43 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 |
 */
 
-Route::get('/', function () {
+//METADADOS
+Route::get('metadados', function () {
     return view('posts', [
-        'posts' =>  PostModel::allPosts()
+        'posts' =>  PostMeta::allPosts()
     ]);
 });
 
-Route::get('post/{post}', function ($id) {
+Route::get('metadados/post/{post}', function ($id) {
     return view('post', [
-        'post' =>  PostModel::findOrFailPost($id)
+        'post' =>  PostMeta::findOrFailPost($id)
     ]);
 })->whereNumber('post');
+
+//ELOQUENT
+Route::get('/', function () {
+    // DB::listen(function($query){
+    //     logger($query->sql);
+    // });
+    return view('posts', [
+        'posts' =>  Post::latest()->with(['category', 'author'])->get()
+    ]);
+});
+
+Route::get('post/{post}', function (Post $post) {//Route Model Binding
+    return view('post', [
+        'post' =>  $post
+    ]);
+})->whereNumber('post');
+
+Route::get('categories/{category:slug}', function (Category $category) {//Route Model Binding
+    return view('posts', [
+        'posts' =>  $category->posts->load(['category','author'])
+    ]);
+});
+
+Route::get('authors/{author}', function (User $author) {//Route Model Binding
+    return view('posts', [
+        'posts' =>  $author->posts->load(['category','author'])
+    ]);
+});

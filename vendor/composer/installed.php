@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9420513eb8592b9367eb24983f157082096a5efb',
+        'reference' => 'c0c2ce287f9159b3feb51629b9952820a32798c9',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -388,6 +388,15 @@
                 0 => 'v8.52.0',
             ),
         ),
+        'itsgoingd/clockwork' => array(
+            'pretty_version' => 'v5.1.0',
+            'version' => '5.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../itsgoingd/clockwork',
+            'aliases' => array(),
+            'reference' => 'b963dee47429a49c9669981cfa9a8362ce209278',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -409,7 +418,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9420513eb8592b9367eb24983f157082096a5efb',
+            'reference' => 'c0c2ce287f9159b3feb51629b9952820a32798c9',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-use function PHPUnit\Framework\returnSelf;
 
-class PostModel extends Model
+class PostMeta extends Model
 {
     public $title;
     public $excerpt;
@@ -32,7 +31,7 @@ class PostModel extends Model
         return cache()->rememberForever('PostModel.allPosts', function () {
             return collect(File::files(resource_path("posts/")))
             ->map(fn($file)=> YamlFrontMatter::parseFile($file))
-            ->map(fn($document)=>new PostModel(
+            ->map(fn($document)=>new PostMeta(
                     $document->title,
                     $document->excerpt,
                     $document->date,
