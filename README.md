@@ -1,2 +1,2 @@
-# Blog_Laravel_1.0
+# Blog_Laravel
  
