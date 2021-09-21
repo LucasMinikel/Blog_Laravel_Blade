@@ -36,9 +36,10 @@ Route::get('/', function () {
     //     logger($query->sql);
     // });
     return view('posts', [
-        'posts' =>  Post::latest()->with(['category', 'author'])->get()
+        'posts' =>  Post::latest()->with(['category', 'author'])->get(),
+        'categories' =>  Category::all()
     ]);
-});
+})->name('home');
 
 Route::get('post/{post}', function (Post $post) {//Route Model Binding
     return view('post', [
@@ -48,12 +49,15 @@ Route::get('post/{post}', function (Post $post) {//Route Model Binding
 
 Route::get('categories/{category:slug}', function (Category $category) {//Route Model Binding
     return view('posts', [
-        'posts' =>  $category->posts->load(['category','author'])
+        'posts' =>  $category->posts->load(['category','author']),
+        'categories' =>  Category::all(),
+        'currentCategory' => $category
     ]);
-});
+})->name('categorias');
 
 Route::get('authors/{author}', function (User $author) {//Route Model Binding
     return view('posts', [
-        'posts' =>  $author->posts->load(['category','author'])
+        'posts' =>  $author->posts->load(['category','author']),
+        'categories' =>  Category::all()
     ]);
 });
