@@ -45,7 +45,7 @@ class="transition-colors duration-300 hover:bg-gray-100 border border-black bord
             <div class="hidden lg:block">
                 <a href="/post/{{$post->id}}"
                 class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
-                >Ver mais</a>
+                >Mais</a>
             </div>
         </footer>
     </div>
