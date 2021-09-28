@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $with = ['category', 'author'];
-    // protected $guarded = ['id'];
+    protected $guarded = ['id'];
     
     public function category(){
         return $this->belongsTo(Category::class);
@@ -33,13 +33,5 @@ class Post extends Model
             $query->where('id',$author)
         )
         );
-    //     $query->when($filters['category']??false, fn($query, $category)=>
-    //         $query
-    //         ->whereExists(fn($query)=>
-    //             $query->from('categories')
-    //                 ->where('categories.id', 'posts.category_id')
-    //                 ->where('categories.slug', $category)
-    //         )
-    // );
     }
 }
