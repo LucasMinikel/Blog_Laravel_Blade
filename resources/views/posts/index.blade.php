@@ -1,3 +1,6 @@
+@php
+    \Carbon\Carbon::setLocale('pt_BR');
+@endphp
 <x-layout>
 
     @include('/posts/header')
